@@ -30,8 +30,8 @@ export default function MarketOpportunity({ step }: Props) {
             <Badge variant="secondary" size="md">Market Opportunity</Badge>
           </motion.div>
           <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
-            A massive{' '}
-            <GradientText variant="primary">new category</GradientText>{' '}
+            A new{' '}
+            <GradientText variant="primary">foundational software category</GradientText>{' '}
             is emerging.
           </motion.h2>
           <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-lg max-w-xl">
@@ -141,6 +141,17 @@ export default function MarketOpportunity({ step }: Props) {
             </AnimatePresence>
           </div>
         </div>
+
+        {/* Source credibility footer */}
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 1.2 }}
+          className="text-[10px] text-[var(--fg-muted)] font-mono opacity-60"
+        >
+          Market estimates derived from AI software, startup tooling, and enterprise architecture segments. Projections are directional.
+        </motion.p>
       </div>
     </div>
   )

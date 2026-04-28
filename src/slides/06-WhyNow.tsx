@@ -99,7 +99,7 @@ export default function WhyNow({ step }: Props) {
                 <div>
                   <p className="text-xs text-[var(--fg-muted)] uppercase tracking-widest font-mono mb-1">Then</p>
                   <p className="text-xl font-bold text-[var(--fg)]">
-                    Cursor{' '}<span className="text-[var(--fg-muted)]">changed</span>{' '}
+                    Cursor{' '}<span className="text-[var(--fg-muted)]">accelerated</span>{' '}
                     <span className="text-[#0087f8]">coding</span>
                   </p>
                 </div>
@@ -107,8 +107,8 @@ export default function WhyNow({ step }: Props) {
                 <div>
                   <p className="text-xs text-[var(--fg-muted)] uppercase tracking-widest font-mono mb-1">Now</p>
                   <p className="text-xl font-bold text-[var(--fg)]">
-                    Avylo{' '}<span className="text-[var(--fg-muted)]">changes</span>{' '}
-                    <GradientText variant="full">product architecture</GradientText>
+                    Avylo{' '}<span className="text-[var(--fg-muted)]">accelerates</span>{' '}
+                    <GradientText variant="full">company creation</GradientText>
                   </p>
                 </div>
               </GlassCard>

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { Database, FileText, GitBranch, Layers, Map, Users } from 'lucide-react'
+import { Database, FileText, GitBranch, Layers, Map, TrendingUp, Users, Zap } from 'lucide-react'
 import Badge from '../components/ui/Badge'
 import GlassCard from '../components/ui/GlassCard'
 import GradientText from '../components/ui/GradientText'
@@ -38,8 +38,8 @@ const modules = [
   },
   {
     icon: <Users     size={22} />,
-    title: 'Team & Stack Advisor',
-    desc: 'Recommends optimal team composition and technology stack based on product requirements.',
+    title: 'Execution Intelligence Layer',
+    desc: 'Recommends optimal team composition, technology stack, and organizational structure based on product requirements.',
     color: '#fbbf24',
     badge: 'Intelligence',
   },
@@ -49,6 +49,20 @@ const modules = [
     desc: 'Auto-generates entity-relationship models, schema recommendations, and data strategy.',
     color: '#f87171',
     badge: 'Data',
+  },
+  {
+    icon: <TrendingUp size={22} />,
+    title: 'GTM Layer',
+    desc: 'Go-to-market channel recommendations, ICP definition, and positioning framework tailored to your product.',
+    color: '#34d399',
+    badge: 'GTM',
+  },
+  {
+    icon: <Zap size={22} />,
+    title: 'Founder OS',
+    desc: 'A unified strategic workspace that keeps product decisions, architecture, and execution in one living system.',
+    color: '#0087f8',
+    badge: 'Platform',
   },
 ]
 
@@ -71,7 +85,7 @@ export default function ProductExperience({ step }: Props) {
         </motion.div>
 
         {/* Module grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {modules.map((m, i) => (
             <AnimatePresence key={i}>
               {step >= i && (

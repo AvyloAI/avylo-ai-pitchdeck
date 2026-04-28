@@ -15,6 +15,7 @@ import { slideVariants } from './lib/animations'
 import HeroCover from './slides/01-HeroCover'
 import TheProblem from './slides/02-TheProblem'
 import TheSolution from './slides/03-TheSolution'
+import CategoryCreation from './slides/03b-CategoryCreation'
 import ProductExperience from './slides/04-ProductExperience'
 import MarketOpportunity from './slides/05-MarketOpportunity'
 import WhyNow from './slides/06-WhyNow'
@@ -23,13 +24,14 @@ import CompetitiveAdvantage from './slides/08-CompetitiveAdvantage'
 import GoToMarket from './slides/09-GoToMarket'
 import Traction from './slides/10-Traction'
 import Vision from './slides/11-Vision'
-import Founder from './slides/12-Founder'
+import FoundingTeam from './slides/12-Founder'
 import TheAsk from './slides/13-TheAsk'
 
 const SLIDE_COMPONENTS = [
   HeroCover,
   TheProblem,
   TheSolution,
+  CategoryCreation,
   ProductExperience,
   MarketOpportunity,
   WhyNow,
@@ -38,7 +40,7 @@ const SLIDE_COMPONENTS = [
   GoToMarket,
   Traction,
   Vision,
-  Founder,
+  FoundingTeam,
   TheAsk,
 ]
 
@@ -69,7 +71,7 @@ function PresentationApp() {
   }, [state])
 
   const handleJumpToProduct = useCallback(() => {
-    state.goTo(3)
+    state.goTo(4)
   }, [state])
 
   const renderSlide = useCallback(

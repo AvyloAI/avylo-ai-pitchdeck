@@ -47,11 +47,11 @@ export default function CompetitiveAdvantage({ step }: Props) {
             <Badge variant="accent" size="md">Competitive Advantage</Badge>
           </motion.div>
           <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
-            Avylo = the{' '}
-            <GradientText variant="full">full strategic architecture ecosystem.</GradientText>
+            No competitor owns the{' '}
+            <GradientText variant="full">strategic product intelligence layer.</GradientText>
           </motion.h2>
           <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-base max-w-xl">
-            Every competitor solves a slice of the problem. Avylo solves all of it — in one unified AI platform.
+            This is not feature competition. This is category ownership. Every tool solves a slice — Avylo owns the full infrastructure layer.
           </motion.p>
         </motion.div>
 

@@ -13,8 +13,8 @@ const phases = [
     label: 'Founders & Indie Builders',
     icon: <Users size={20} />,
     color: '#0087f8',
-    timeline: 'Q1–Q2 2025',
-    channels: ['Product Hunt', 'Twitter / X', 'Indie Hackers', 'Direct outreach'],
+    timeline: 'Q2–Q3 2026',
+    channels: ['Product Hunt', 'Twitter / X', 'Indie Hackers', 'Founder-led growth'],
     kpi: '500 paying users',
   },
   {
@@ -22,8 +22,8 @@ const phases = [
     label: 'Startup Ecosystems',
     icon: <Building2 size={20} />,
     color: '#44c4f6',
-    timeline: 'Q3–Q4 2025',
-    channels: ['YC / Techstars', 'Accelerator partnerships', 'Angel networks', 'VC referrals'],
+    timeline: 'Q3–Q4 2026',
+    channels: ['Incubator partnerships', 'Accelerator programs', 'Angel networks', 'VC referrals'],
     kpi: '10 ecosystem deals',
   },
   {
@@ -31,7 +31,7 @@ const phases = [
     label: 'Universities & Labs',
     icon: <GraduationCap size={20} />,
     color: '#44c4f6',
-    timeline: 'Q1–Q2 2026',
+    timeline: 'Q1–Q2 2027',
     channels: ['CS department pilots', 'Innovation centers', 'Research partnerships', 'Edu licensing'],
     kpi: '5 university pilots',
   },
@@ -40,7 +40,7 @@ const phases = [
     label: 'Enterprise & Global',
     icon: <Globe size={20} />,
     color: '#34d399',
-    timeline: 'Q3 2026+',
+    timeline: 'Q3 2027+',
     channels: ['Enterprise sales team', 'Partner network', 'API marketplace', 'White-label deals'],
     kpi: '$2M+ ARR',
   },
@@ -61,7 +61,7 @@ export default function GoToMarket({ step }: Props) {
             <GradientText variant="primary">expansion strategy.</GradientText>
           </motion.h2>
           <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-sm max-w-xl">
-            We go deep before we go wide — building product-led growth from the founder community outward.
+            Founder-led growth + ecosystem partnerships. Product-led acquisition, institutionally amplified.
           </motion.p>
         </motion.div>
 

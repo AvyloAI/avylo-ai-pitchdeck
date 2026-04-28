@@ -58,9 +58,8 @@ export default function TheAsk({ step }: Props) {
             variants={cinemaEntrance}
             className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-3xl mx-auto"
           >
-            Join us in building the{' '}
-            <GradientText variant="full">infrastructure for the next generation</GradientText>{' '}
-            of products.
+            Seeking strategic capital, ecosystem leverage, and pilot partnerships to{' '}
+            <GradientText variant="full">define the AI Product Infrastructure category.</GradientText>
           </motion.h2>
         </motion.div>
 

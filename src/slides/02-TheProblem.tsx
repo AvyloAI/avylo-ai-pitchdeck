@@ -11,31 +11,31 @@ const painPoints = [
   {
     icon: <Layers size={20} />,
     title: 'No architecture clarity',
-    body: 'Founders ship features without a coherent system design — technical debt accumulates from day one.',
+    body: 'Founders ship features without coherent system design — technical debt compounds from day one and costs tens of thousands to unwind.',
     color: '#f87171',
   },
   {
     icon: <Cpu size={20} />,
-    title: 'CTO consultation is expensive',
-    body: 'Expert architectural guidance costs $300–$600/hr. Early-stage startups simply cannot afford it.',
+    title: 'Strategic guidance is inaccessible',
+    body: 'Expert architecture consultation runs $300–$600/hr. Early-stage teams burn runway on the wrong foundation before hiring help.',
     color: '#fbbf24',
   },
   {
     icon: <Clock size={20} />,
-    title: 'Planning takes weeks',
-    body: 'Manually mapping product strategy, data models, and architecture diagrams consumes entire sprints.',
+    title: 'Planning consumes entire sprints',
+    body: 'Manually mapping strategy, data models, and architecture diagrams takes weeks — time that should go toward building and validating.',
     color: '#fb923c',
   },
   {
     icon: <AlertTriangle size={20} />,
-    title: 'Tools are completely disconnected',
-    body: 'Strategy lives in Notion. Architecture in Miro. Roadmaps in Jira. Nothing talks to each other.',
+    title: 'Fragmented, disconnected tools',
+    body: 'Strategy in Notion. Diagrams in Miro. Roadmaps in Jira. Nothing integrates. The strategic layer is always missing.',
     color: '#f87171',
   },
   {
     icon: <Bot size={20} />,
-    title: 'AI helps code — not strategy',
-    body: 'GitHub Copilot and ChatGPT accelerate implementation. But they cannot replace architectural thinking.',
+    title: 'AI accelerates code, not strategy',
+    body: 'Copilot and ChatGPT speed up implementation — but cannot define product architecture, team structure, or execution strategy.',
     color: '#44c4f6',
   },
 ]
@@ -51,14 +51,13 @@ export default function TheProblem({ step }: Props) {
             <Badge variant="danger" size="md">The Problem</Badge>
           </motion.div>
           <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight max-w-3xl">
-            Building products is{' '}
+            Execution is faster than ever.{' '}
             <GradientText variant="violet" className="block md:inline">
-              chaotic, fragmented,
-            </GradientText>{' '}
-            and painfully slow.
+              Strategic clarity is not.
+            </GradientText>
           </motion.h2>
           <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-sm max-w-xl">
-            The tools exist. The talent exists. But the strategic layer is still missing.
+            Founders waste thousands before building the right architecture. The strategic layer is still missing.
           </motion.p>
         </motion.div>
 
@@ -105,8 +104,8 @@ export default function TheProblem({ step }: Props) {
             >
               {[
                 { label: 'of startups fail due to poor product-market fit & planning', value: '90%', color: '#f87171' },
-                { label: 'avg weeks lost to manual architecture planning per project', value: '3–6', color: '#fbbf24' },
-                { label: 'cost of a senior CTO per hour of strategic consultation', value: '$450', color: '#0087f8' },
+                { label: 'avg weeks lost to manual architecture & strategy planning', value: '3–6', color: '#fbbf24' },
+                { label: 'cost of senior technical co-founder per hour of strategy', value: '$450', color: '#0087f8' },
               ].map((s, i) => (
                 <motion.div
                   key={i}
