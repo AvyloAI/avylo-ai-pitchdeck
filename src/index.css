@@ -1,0 +1,295 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Color System ──────────────────────────────────────────────────────── */
+:root {
+  --bg:           #060816;
+  --surface:      #0a0f1e;
+  --card:         #0d1228;
+  --primary:      #0087f8;
+  --secondary:    #44c4f6;
+  --accent:       #44c4f6;
+  --muted:        #1a2035;
+  --fg:           #e2e8f0;
+  --fg-muted:     #7c8ea6;
+  --border:       rgba(255, 255, 255, 0.07);
+  --border-med:   rgba(255, 255, 255, 0.12);
+  --border-strong:rgba(255, 255, 255, 0.18);
+  --radius:       0.75rem;
+  --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
+
+  --gradient-primary: linear-gradient(135deg, #0087f8, #44c4f6);
+  --gradient-violet:  linear-gradient(135deg, #0087f8, #44c4f6);
+  --gradient-full:    linear-gradient(135deg, #0087f8, #44c4f6);
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────── */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Sora', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Glassmorphism ─────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(13, 18, 40, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+}
+
+.glass-med {
+  background: rgba(13, 18, 40, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-med);
+}
+
+.glass-strong {
+  background: rgba(13, 18, 40, 0.90);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid var(--border-med);
+}
+
+/* ─── Gradient utilities ────────────────────────────────────────────────── */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-violet {
+  background: var(--gradient-violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-full {
+  background: var(--gradient-full);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-primary);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.gradient-border-violet::before {
+  background: var(--gradient-violet);
+}
+
+/* ─── Glow effects ──────────────────────────────────────────────────────── */
+.glow-primary {
+  box-shadow: 0 0 40px rgba(0, 135, 248, 0.25), 0 0 80px rgba(0, 135, 248, 0.1);
+}
+.glow-secondary {
+  box-shadow: 0 0 40px rgba(68, 196, 246, 0.2), 0 0 80px rgba(68, 196, 246, 0.08);
+}
+.glow-accent {
+  box-shadow: 0 0 40px rgba(68, 196, 246, 0.2), 0 0 80px rgba(68, 196, 246, 0.08);
+}
+.text-glow-primary {
+  text-shadow: 0 0 30px rgba(0, 135, 248, 0.6);
+}
+.text-glow-cyan {
+  text-shadow: 0 0 30px rgba(68, 196, 246, 0.6);
+}
+
+/* ─── Slide root ────────────────────────────────────────────────────────── */
+.slide-root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+
+/* ─── Export capture mode ([data-capture-slide]) ───────────────────────── */
+[data-capture-slide] .slide-root {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Kill every CSS transition and animation in the capture container */
+[data-capture-slide],
+[data-capture-slide] * {
+  transition-duration:        0ms !important;
+  transition-delay:           0ms !important;
+  animation-duration:         0ms !important;
+  animation-delay:            0ms !important;
+  animation-fill-mode:        forwards !important;
+}
+
+/* Force all motion elements to be fully visible */
+[data-capture-slide] [style*="opacity: 0"] {
+  opacity: 1 !important;
+}
+[data-capture-slide] [style*="opacity:0"] {
+  opacity: 1 !important;
+}
+
+/*
+  GRADIENT TEXT FIX
+  html2canvas does NOT support -webkit-background-clip: text.
+  It renders the gradient background as a solid colored rectangle
+  behind transparent text, creating the blue-box glitch.
+  Solution: disable the background-clip technique and use a solid
+  brand color so the text is still on-brand but clean in the PDF.
+*/
+[data-capture-slide] .gradient-text,
+[data-capture-slide] .gradient-text-violet,
+[data-capture-slide] .gradient-text-full {
+  background:                 none !important;
+  -webkit-background-clip:    unset !important;
+  background-clip:            unset !important;
+  -webkit-text-fill-color:    #44c4f6 !important;
+  color:                      #44c4f6 !important;
+}
+
+/* Also fix any inline style that applies background-clip: text */
+[data-capture-slide] [style*="background-clip"],
+[data-capture-slide] [style*="-webkit-background-clip"] {
+  background:                 none !important;
+  -webkit-background-clip:    unset !important;
+  background-clip:            unset !important;
+  -webkit-text-fill-color:    #44c4f6 !important;
+  color:                      #44c4f6 !important;
+}
+
+/* Solid glass for html2canvas (backdrop-filter renders as transparent) */
+[data-capture-slide] .glass {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(13, 18, 40, 0.88) !important;
+}
+[data-capture-slide] .glass-med {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(13, 18, 40, 0.94) !important;
+}
+[data-capture-slide] .glass-strong {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(13, 18, 40, 0.97) !important;
+}
+
+/* Hide interactive CTAs from the exported PDF */
+[data-capture-slide] [data-print-hidden] {
+  display: none !important;
+}
+
+/* ─── Scrollbar (hide for presentation) ────────────────────────────────── */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── @media print (graceful fallback — prefer the html2canvas path) ────── */
+@media print {
+  html, body, #root {
+    overflow: visible !important;
+    height: auto !important;
+    background: #060816 !important;
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  [data-aurora], [data-particles], [data-grid],
+  [data-spotlight], [data-progress], [data-navigation],
+  [data-logo-bar], [data-loading], [data-print-hidden] {
+    display: none !important;
+  }
+
+  .glass, .glass-med, .glass-strong {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(13, 18, 40, 0.95) !important;
+  }
+
+  .gradient-text, .gradient-text-violet, .gradient-text-full {
+    -webkit-text-fill-color: #0087f8 !important;
+  }
+}
+
+
+/* ─── Noise overlay ─────────────────────────────────────────────────────── */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ─── Dot grid pattern ──────────────────────────────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+/* ─── Typewriter cursor ─────────────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--secondary);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+/* ─── Node pulse animation ──────────────────────────────────────────────── */
+@keyframes nodePulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.15); }
+}
+.node-pulse {
+  animation: nodePulse 3s ease-in-out infinite;
+}
+
+/* ─── Line draw animation ───────────────────────────────────────────────── */
+@keyframes lineDraw {
+  from { stroke-dashoffset: 300; }
+  to   { stroke-dashoffset: 0; }
+}
+.line-draw {
+  animation: lineDraw 1.2s var(--ease-out) forwards;
+}
+
+/* ─── Orbit animation ───────────────────────────────────────────────────── */
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-r)) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(var(--orbit-r)) rotate(-360deg); }
+}
