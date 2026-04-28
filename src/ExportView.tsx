@@ -23,6 +23,7 @@ import { SLIDES } from './lib/slides-data'
 import HeroCover from './slides/01-HeroCover'
 import TheProblem from './slides/02-TheProblem'
 import TheSolution from './slides/03-TheSolution'
+import CategoryCreation from './slides/03b-CategoryCreation'
 import ProductExperience from './slides/04-ProductExperience'
 import MarketOpportunity from './slides/05-MarketOpportunity'
 import WhyNow from './slides/06-WhyNow'
@@ -46,6 +47,7 @@ const SLIDE_COMPONENTS: ComponentType<SlideProps>[] = [
   HeroCover as ComponentType<SlideProps>,
   TheProblem,
   TheSolution,
+  CategoryCreation,
   ProductExperience,
   MarketOpportunity,
   WhyNow,
