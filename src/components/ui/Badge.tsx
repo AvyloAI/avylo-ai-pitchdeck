@@ -18,8 +18,8 @@ const variantStyles: Record<string, string> = {
 }
 
 const sizeStyles = {
-  sm: 'px-2.5 py-0.5 text-xs',
-  md: 'px-3.5 py-1 text-sm',
+  sm: 'px-2.5 py-[5px] text-xs',
+  md: 'px-3.5 py-[7px] text-sm',
 }
 
 export default function Badge({
@@ -30,12 +30,15 @@ export default function Badge({
 }: BadgeProps) {
   return (
     <span
-      className={`
-        inline-flex items-center rounded-full font-medium tracking-wide
-        ${variantStyles[variant]}
-        ${sizeStyles[size]}
-        ${className}
-      `}
+      className={[
+        'inline-block rounded-full font-medium tracking-wide whitespace-nowrap text-center',
+        variantStyles[variant],
+        sizeStyles[size],
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      style={{ lineHeight: 1 }}
     >
       {children}
     </span>

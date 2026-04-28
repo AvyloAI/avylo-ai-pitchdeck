@@ -16,9 +16,9 @@ const variants = {
 }
 
 const sizes = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-sm',
-  lg: 'px-8 py-4 text-base',
+  sm: 'px-4 py-[9px] text-sm',
+  md: 'px-6 py-[13px] text-sm',
+  lg: 'px-8 py-[17px] text-base',
 }
 
 export default function Button({
@@ -32,9 +32,10 @@ export default function Button({
   return (
     <button
       className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
+      style={{ lineHeight: 1 }}
       {...props}
     >
-      {icon && <span className="shrink-0">{icon}</span>}
+      {icon && <span className="shrink-0 flex items-center">{icon}</span>}
       {children}
     </button>
   )

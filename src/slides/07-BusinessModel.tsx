@@ -67,7 +67,7 @@ const plans = [
 export default function BusinessModel({ step }: Props) {
   return (
     <div className="slide-root">
-      <div className="relative z-10 w-full max-w-6xl px-4 flex flex-col gap-7">
+      <div className="relative z-10 w-full max-w-6xl px-2 flex flex-col gap-5">
 
         {/* Header */}
         <motion.div variants={stagger} initial="hidden" animate="visible" className="flex flex-col gap-3">
@@ -80,8 +80,8 @@ export default function BusinessModel({ step }: Props) {
           </motion.h2>
         </motion.div>
 
-        {/* Plans grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        {/* Plans grid — 6 equal columns */}
+        <div className="grid grid-cols-6 gap-2">
           {plans.map((p, i) => (
             <AnimatePresence key={i}>
               {step >= i && (
@@ -92,7 +92,7 @@ export default function BusinessModel({ step }: Props) {
                   className="h-full"
                 >
                   <GlassCard
-                    className={`p-4 flex flex-col gap-3 h-full ${p.highlighted ? 'glow-secondary' : ''}`}
+                    className={`p-3 flex flex-col gap-2 h-full ${p.highlighted ? 'glow-secondary' : ''}`}
                     gradientBorder={p.highlighted}
                     variant={p.highlighted ? 'med' : 'default'}
                   >
@@ -101,16 +101,16 @@ export default function BusinessModel({ step }: Props) {
                     )}
                     <div>
                       <div className="flex items-baseline gap-0.5 mb-0.5">
-                        <span className="text-xl font-extrabold" style={{ color: p.color }}>{p.price}</span>
-                        <span className="text-xs text-[var(--fg-muted)]">{p.period}</span>
+                        <span className="text-lg font-extrabold" style={{ color: p.color }}>{p.price}</span>
+                        <span className="text-[10px] text-[var(--fg-muted)]">{p.period}</span>
                       </div>
-                      <p className="font-bold text-sm text-[var(--fg)]">{p.name}</p>
-                      <p className="text-[10px] text-[var(--fg-muted)] leading-snug mt-0.5">{p.desc}</p>
+                      <p className="font-bold text-xs text-[var(--fg)]">{p.name}</p>
+                      <p className="text-[9px] text-[var(--fg-muted)] leading-snug mt-0.5">{p.desc}</p>
                     </div>
-                    <ul className="flex flex-col gap-1.5">
+                    <ul className="flex flex-col gap-1">
                       {p.features.map((f, j) => (
-                        <li key={j} className="flex items-start gap-1.5 text-[11px] text-[var(--fg-muted)]">
-                          <Check size={10} className="mt-0.5 flex-shrink-0" style={{ color: p.color }} />
+                        <li key={j} className="flex items-start gap-1 text-[10px] text-[var(--fg-muted)]">
+                          <Check size={9} className="mt-0.5 flex-shrink-0" style={{ color: p.color }} />
                           {f}
                         </li>
                       ))}

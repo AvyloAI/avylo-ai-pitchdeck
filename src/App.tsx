@@ -1,20 +1,16 @@
-import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
-import { FileDown } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useState } from 'react'
 import AuroraBackground from './components/background/AuroraBackground'
 import GridBackground from './components/background/GridBackground'
 import ParticleField from './components/background/ParticleField'
 import SpotlightCursor from './components/background/SpotlightCursor'
-import ExportProgressOverlay from './components/layout/ExportProgressOverlay'
 import LoadingScreen from './components/layout/LoadingScreen'
 import Logo from './components/layout/Logo'
 import Navigation from './components/layout/Navigation'
 import ProgressBar from './components/layout/ProgressBar'
-import Button from './components/ui/Button'
+import ExportView from './ExportView'
 import { usePresentation } from './hooks/usePresentation'
-import { useExportPdf, EXPORT_W, EXPORT_H } from './hooks/useExportPdf'
 import { slideVariants } from './lib/animations'
-import { SLIDES } from './lib/slides-data'
 
 import HeroCover from './slides/01-HeroCover'
 import TheProblem from './slides/02-TheProblem'
@@ -46,17 +42,24 @@ const SLIDE_COMPONENTS = [
   TheAsk,
 ]
 
+/**
+ * App — top-level router.
+ *
+ * When the URL contains ?export=true, renders ExportView (the Playwright
+ * PDF surface). Otherwise renders the normal interactive presentation.
+ * Routing is split into two components to satisfy React's Rules of Hooks —
+ * hooks must not be called after a conditional return.
+ */
 export default function App() {
+  const isExportMode = new URLSearchParams(window.location.search).get('export') === 'true'
+  return isExportMode ? <ExportView /> : <PresentationApp />
+}
+
+// ─── Interactive presentation ─────────────────────────────────────────────────
+
+function PresentationApp() {
   const [isLoading, setIsLoading] = useState(true)
   const state = usePresentation()
-  const {
-    isExporting,
-    exportSlideIndex,
-    progress: exportProgress,
-    startExport,
-  } = useExportPdf()
-
-  const handleExportPdf = useCallback(() => startExport(), [startExport])
 
   const handleStartPresentation = useCallback(() => {
     if (document.fullscreenEnabled && !document.fullscreenElement) {
@@ -76,7 +79,6 @@ export default function App() {
           <HeroCover
             step={step}
             onStartPresentation={interactive ? handleStartPresentation : undefined}
-            onExportPdf={interactive ? handleExportPdf : undefined}
             onJumpToProduct={interactive ? handleJumpToProduct : undefined}
           />
         )
@@ -85,7 +87,7 @@ export default function App() {
       const SlideComponent = SLIDE_COMPONENTS[index]
       return <SlideComponent step={step} />
     },
-    [handleExportPdf, handleJumpToProduct, handleStartPresentation]
+    [handleJumpToProduct, handleStartPresentation]
   )
 
   const handleClick = useCallback(
@@ -110,18 +112,16 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Persistent background layers (always rendered for perf) */}
-      {!isExporting && (
-        <>
-          <AuroraBackground />
-          <GridBackground />
-          <ParticleField />
-          <SpotlightCursor />
-        </>
-      )}
+      {/* Persistent animated background layers */}
+      <>
+        <AuroraBackground />
+        <GridBackground />
+        <ParticleField />
+        <SpotlightCursor />
+      </>
 
       {/* Main presentation */}
-      {!isLoading && !isExporting && (
+      {!isLoading && (
         <div
           className="relative w-screen h-screen overflow-hidden"
           onClick={handleClick}
@@ -134,18 +134,8 @@ export default function App() {
             <div className="pointer-events-auto">
               <Logo height={26} />
             </div>
-            <div className="pointer-events-auto flex items-center gap-3">
-              <div className="hidden md:block text-xs font-mono text-[var(--fg-muted)] tracking-widest uppercase">
-                Investor Experience
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                icon={<FileDown size={14} />}
-                onClick={handleExportPdf}
-              >
-                Export Deck PDF
-              </Button>
+            <div className="hidden md:block text-xs font-mono text-[var(--fg-muted)] tracking-widest uppercase">
+              Investor Experience
             </div>
           </div>
 
@@ -183,67 +173,6 @@ export default function App() {
           />
         </div>
       )}
-
-      {/* ── Export capture container — single slide at a time ─────────── */}
-      {/*
-        Renders ONE slide at EXPORT_W×EXPORT_H (1280×720). This ensures:
-        - Always 16:9 landscape regardless of browser window size.
-        - MotionConfig reducedMotion="always" makes all Framer Motion
-          animations skip instantly to their final values, so html2canvas
-          always captures a fully painted frame — no more blank slides.
-        - windowWidth/windowHeight passed to html2canvas match the container
-          so CSS viewport units resolve correctly.
-      */}
-      {!isLoading && isExporting && exportSlideIndex !== null && (
-        <MotionConfig reducedMotion="always">
-          <div
-            data-capture-slide
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              width: EXPORT_W,
-              height: EXPORT_H,
-              overflow: 'hidden',
-              // z-index 50 sits BEHIND the progress overlay (z-300).
-              // The user only sees the overlay. We do NOT apply any
-              // CSS transform here — transform: scale() corrupts what
-              // html2canvas reads via getBoundingClientRect(), causing
-              // wrong capture dimensions and blank/clipped slides.
-              zIndex: 50,
-              background: [
-                'radial-gradient(ellipse 80% 60% at 18% 0%, rgba(0,135,248,0.20) 0%, transparent 62%)',
-                'radial-gradient(ellipse 55% 45% at 82% 105%, rgba(68,196,246,0.13) 0%, transparent 55%)',
-                '#060816',
-              ].join(', '),
-            }}
-          >
-            {/* Baked-in dot grid (html2canvas can't capture canvas animations) */}
-            <div
-              aria-hidden
-              style={{
-                position: 'absolute',
-                inset: 0,
-                backgroundImage:
-                  'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0)',
-                backgroundSize: '40px 40px',
-                zIndex: 0,
-                pointerEvents: 'none',
-              }}
-            />
-            {/* Slide content — padded to match presentation view */}
-            <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%' }}>
-              {renderSlide(exportSlideIndex, SLIDES[exportSlideIndex].steps, false)}
-            </div>
-          </div>
-        </MotionConfig>
-      )}
-
-      {/* ── Export progress overlay ───────────────────────────────────── */}
-      <ExportProgressOverlay
-        progress={exportProgress}
-        visible={isExporting}
-      />
     </>
   )
 }

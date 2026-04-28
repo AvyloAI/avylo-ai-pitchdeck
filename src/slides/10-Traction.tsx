@@ -53,7 +53,7 @@ const milestones = [
 export default function Traction({ step }: Props) {
   return (
     <div className="slide-root">
-      <div className="relative z-10 w-full max-w-6xl px-4 flex flex-col gap-8">
+      <div className="relative z-10 w-full max-w-6xl px-4 flex flex-col gap-6">
 
         {/* Header */}
         <motion.div variants={stagger} initial="hidden" animate="visible" className="flex flex-col gap-3">
@@ -64,7 +64,7 @@ export default function Traction({ step }: Props) {
             Not a concept.{' '}
             <GradientText variant="primary">A working product.</GradientText>
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-base max-w-xl">
+          <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-sm max-w-xl">
             Built, tested, and validated — with real founders, real feedback, real signal.
           </motion.p>
         </motion.div>

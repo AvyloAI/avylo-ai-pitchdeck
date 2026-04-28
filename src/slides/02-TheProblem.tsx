@@ -43,7 +43,7 @@ const painPoints = [
 export default function TheProblem({ step }: Props) {
   return (
     <div className="slide-root">
-      <div className="relative z-10 w-full max-w-6xl px-4 flex flex-col gap-8">
+      <div className="relative z-10 w-full max-w-6xl px-4 flex flex-col gap-6">
 
         {/* Header */}
         <motion.div variants={stagger} initial="hidden" animate="visible" className="flex flex-col gap-3">
@@ -57,7 +57,7 @@ export default function TheProblem({ step }: Props) {
             </GradientText>{' '}
             and painfully slow.
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-base md:text-lg max-w-xl">
+          <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-sm max-w-xl">
             The tools exist. The talent exists. But the strategic layer is still missing.
           </motion.p>
         </motion.div>

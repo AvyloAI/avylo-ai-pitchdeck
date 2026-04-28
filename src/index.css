@@ -131,79 +131,129 @@ html, body, #root {
 }
 
 
-/* ─── Export capture mode ([data-capture-slide]) ───────────────────────── */
-[data-capture-slide] .slide-root {
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden !important;
+/* ─── Export mode — Playwright native PDF pipeline ─────────────────────── */
+/*                                                                            */
+/* Activated via /?export=true — ExportView adds "export-mode" to <body>.    */
+/* Playwright renders in Chromium, so gradient-text, backdrop-filter,        */
+/* CSS masks, and border-radius all work perfectly with ZERO workarounds.    */
+
+/* 1. Unlock document overflow so all stacked slide pages are accessible */
+body.export-mode,
+body.export-mode #root {
+  width:    1280px;
+  height:   auto;
+  overflow: visible;
 }
 
-/* Kill every CSS transition and animation in the capture container */
-[data-capture-slide],
-[data-capture-slide] * {
-  transition-duration:        0ms !important;
-  transition-delay:           0ms !important;
-  animation-duration:         0ms !important;
-  animation-delay:            0ms !important;
-  animation-fill-mode:        forwards !important;
-}
-
-/* Force all motion elements to be fully visible */
-[data-capture-slide] [style*="opacity: 0"] {
-  opacity: 1 !important;
-}
-[data-capture-slide] [style*="opacity:0"] {
-  opacity: 1 !important;
-}
-
-/*
-  GRADIENT TEXT FIX
-  html2canvas does NOT support -webkit-background-clip: text.
-  It renders the gradient background as a solid colored rectangle
-  behind transparent text, creating the blue-box glitch.
-  Solution: disable the background-clip technique and use a solid
-  brand color so the text is still on-brand but clean in the PDF.
-*/
-[data-capture-slide] .gradient-text,
-[data-capture-slide] .gradient-text-violet,
-[data-capture-slide] .gradient-text-full {
-  background:                 none !important;
-  -webkit-background-clip:    unset !important;
-  background-clip:            unset !important;
-  -webkit-text-fill-color:    #44c4f6 !important;
-  color:                      #44c4f6 !important;
-}
-
-/* Also fix any inline style that applies background-clip: text */
-[data-capture-slide] [style*="background-clip"],
-[data-capture-slide] [style*="-webkit-background-clip"] {
-  background:                 none !important;
-  -webkit-background-clip:    unset !important;
-  background-clip:            unset !important;
-  -webkit-text-fill-color:    #44c4f6 !important;
-  color:                      #44c4f6 !important;
-}
-
-/* Solid glass for html2canvas (backdrop-filter renders as transparent) */
-[data-capture-slide] .glass {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  background: rgba(13, 18, 40, 0.88) !important;
-}
-[data-capture-slide] .glass-med {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  background: rgba(13, 18, 40, 0.94) !important;
-}
-[data-capture-slide] .glass-strong {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  background: rgba(13, 18, 40, 0.97) !important;
-}
-
-/* Hide interactive CTAs from the exported PDF */
-[data-capture-slide] [data-print-hidden] {
+/* 2. Gradient border: CSS mask not supported in Chromium PDF rendering ──── */
+/* -webkit-mask / mask-composite: exclude causes the ::before to render as   */
+/* a solid full-size gradient rectangle that covers the card's content.       */
+/* Fix: hide the ::before and use a plain brand-color border instead.         */
+body.export-mode .gradient-border::before,
+body.export-mode .gradient-border-violet::before {
   display: none !important;
+}
+body.export-mode .gradient-border,
+body.export-mode .gradient-border-violet {
+  border: 1px solid rgba(0, 135, 248, 0.40) !important;
+}
+
+/* 3. Kill all animations and transitions — MotionConfig handles Framer Motion,
+      this covers any remaining CSS animations (glows, pulses, orbits, etc.)  */
+body.export-mode *,
+body.export-mode *::before,
+body.export-mode *::after {
+  animation-duration:   0ms !important;
+  animation-delay:      0ms !important;
+  transition-duration:  0ms !important;
+  transition-delay:     0ms !important;
+  animation-fill-mode:  forwards !important;
+}
+
+/* 4. One slide = one PDF page — exact 16:9 HD dimensions */
+.export-page {
+  position:        relative;
+  width:           1280px;
+  height:          720px;
+  overflow:        hidden;
+  /* Print page-break — Playwright respects both the legacy and modern property */
+  page-break-after: always;
+  break-after:      page;
+}
+
+/* Override viewport-unit .slide-root with explicit pixel dimensions.
+   In Playwright's print media, viewport units can be ambiguous across
+   a multi-page document; hard pixels are always unambiguous.             */
+.export-page .slide-root {
+  width:   1280px !important;
+  height:  720px  !important;
+  padding: 2rem   !important; /* match live presentation padding */
+}
+
+/* 4. Simplified solid background for export — reduces PDF file size significantly */
+/* Complex radial gradients bloat PDF size with rasterized background content.       */
+/* A solid color provides the dark theme without the file size penalty.               */
+.export-bg {
+  position: absolute;
+  inset:    0;
+  background: #060816;
+  z-index:        0;
+  pointer-events: none;
+}
+
+/* 5. Dot grid overlay — replaces the animated canvas GridBackground */
+.export-grid {
+  position:         absolute;
+  inset:            0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.06) 1px, transparent 0);
+  background-size:  40px 40px;
+  z-index:          1;
+  pointer-events:   none;
+}
+
+/* 6. Slide content stacks above background layers */
+.export-content {
+  position: relative;
+  z-index:  2;
+  width:    100%;
+  height:   100%;
+}
+
+/* ─── @media print — controls Playwright's PDF page dimensions ─────────── */
+@media print {
+  /* Tell the browser engine each PDF page is exactly 1280×720 px (16:9).
+     preferCSSPageSize: true in the Playwright script lets this rule win.    */
+  @page {
+    size:   1280px 720px;
+    margin: 0;
+  }
+
+  html, body, #root {
+    width:                    1280px;
+    height:                   auto;
+    overflow:                 visible;
+    background:               #060816;
+    /* Force background rendering — critical for the dark theme in PDF */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust:         exact;
+  }
+
+  /* Each .export-page is one PDF page */
+  .export-page {
+    page-break-after: always;
+    break-after:      page;
+  }
+
+  /* Gradient border: CSS masking (mask-composite: exclude) is not supported  */
+  /* in @media print — the ::before renders as a solid gradient rectangle.    */
+  .gradient-border::before,
+  .gradient-border-violet::before {
+    display: none !important;
+  }
+  .gradient-border,
+  .gradient-border-violet {
+    border: 1px solid rgba(0, 135, 248, 0.40) !important;
+  }
 }
 
 /* ─── Scrollbar (hide for presentation) ────────────────────────────────── */
@@ -213,34 +263,6 @@ html, body, #root {
 }
 *::-webkit-scrollbar {
   display: none;
-}
-
-/* ─── @media print (graceful fallback — prefer the html2canvas path) ────── */
-@media print {
-  html, body, #root {
-    overflow: visible !important;
-    height: auto !important;
-    background: #060816 !important;
-    -webkit-print-color-adjust: exact !important;
-    color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  [data-aurora], [data-particles], [data-grid],
-  [data-spotlight], [data-progress], [data-navigation],
-  [data-logo-bar], [data-loading], [data-print-hidden] {
-    display: none !important;
-  }
-
-  .glass, .glass-med, .glass-strong {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(13, 18, 40, 0.95) !important;
-  }
-
-  .gradient-text, .gradient-text-violet, .gradient-text-full {
-    -webkit-text-fill-color: #0087f8 !important;
-  }
 }
 
 

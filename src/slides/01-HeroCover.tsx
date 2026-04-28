@@ -1,14 +1,11 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, FileDown, Play } from 'lucide-react'
 import Badge from '../components/ui/Badge'
-import Button from '../components/ui/Button'
 import GradientText from '../components/ui/GradientText'
-import { cinemaEntrance, fadeUp, lineDrawVariant, nodeExpand, stagger } from '../lib/animations'
+import { cinemaEntrance, fadeUp, lineDrawVariant, nodeExpand } from '../lib/animations'
 
 interface Props {
   step: number
   onStartPresentation?: () => void
-  onExportPdf?: () => void
   onJumpToProduct?: () => void
 }
 
@@ -33,7 +30,6 @@ const edges = [
 export default function HeroCover({
   step: _step,
   onStartPresentation,
-  onExportPdf,
   onJumpToProduct,
 }: Props) {
   return (
@@ -124,45 +120,7 @@ export default function HeroCover({
           </svg>
         </motion.div>
 
-        {/* CTAs */}
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          animate="visible"
-          data-print-hidden
-          className="flex flex-wrap items-center justify-center gap-3 mt-2"
-        >
-          <motion.div variants={fadeUp}>
-            <Button
-              variant="solid"
-              size="lg"
-              icon={<Play size={16} />}
-              onClick={onStartPresentation}
-            >
-              Enter Presentation
-            </Button>
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <Button
-              variant="outline"
-              size="lg"
-              icon={<ArrowRight size={16} />}
-              onClick={onJumpToProduct}
-            >
-              See Product Flow
-            </Button>
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <Button
-              variant="ghost"
-              size="lg"
-              icon={<FileDown size={16} />}
-              onClick={onExportPdf}
-            >
-              Export Deck PDF
-            </Button>
-          </motion.div>
-        </motion.div>
+
 
         {/* Bottom tagline */}
         <motion.p

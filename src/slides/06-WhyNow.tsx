@@ -41,14 +41,14 @@ const trends = [
 export default function WhyNow({ step }: Props) {
   return (
     <div className="slide-root">
-      <div className="relative z-10 w-full max-w-6xl px-4 flex flex-col gap-8">
+      <div className="relative z-10 w-full max-w-6xl px-4 flex flex-col gap-6">
 
         {/* Header */}
-        <motion.div variants={stagger} initial="hidden" animate="visible" className="flex flex-col gap-3">
+        <motion.div variants={stagger} initial="hidden" animate="visible" className="flex flex-col gap-2">
           <motion.div variants={fadeUp}>
             <Badge variant="warning" size="md">Why Now</Badge>
           </motion.div>
-          <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight max-w-3xl">
+          <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-3xl">
             AI changed{' '}
             <GradientText variant="primary">building.</GradientText>{' '}
             It hasn't changed{' '}

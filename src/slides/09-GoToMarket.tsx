@@ -49,7 +49,7 @@ const phases = [
 export default function GoToMarket({ step }: Props) {
   return (
     <div className="slide-root">
-      <div className="relative z-10 w-full max-w-6xl px-4 flex flex-col gap-8">
+      <div className="relative z-10 w-full max-w-7xl px-4 flex flex-col gap-6">
 
         {/* Header */}
         <motion.div variants={stagger} initial="hidden" animate="visible" className="flex flex-col gap-3">
@@ -60,29 +60,13 @@ export default function GoToMarket({ step }: Props) {
             A deliberate{' '}
             <GradientText variant="primary">expansion strategy.</GradientText>
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-base max-w-xl">
+          <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-sm max-w-xl">
             We go deep before we go wide — building product-led growth from the founder community outward.
           </motion.p>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Connecting line */}
-          <div className="absolute top-8 left-8 right-0 h-px hidden md:block" style={{ background: 'rgba(255,255,255,0.07)' }}>
-            <AnimatePresence>
-              {step >= 1 && (
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${Math.min(step, 3) * 33.33}%` }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                  className="h-full"
-                  style={{ background: 'linear-gradient(90deg, #0087f8, #44c4f6, #44c4f6)' }}
-                />
-              )}
-            </AnimatePresence>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {/* Cards grid — no decorative line */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {phases.map((p, i) => (
               <AnimatePresence key={i}>
                 {step >= i && (
@@ -134,7 +118,6 @@ export default function GoToMarket({ step }: Props) {
               </AnimatePresence>
             ))}
           </div>
-        </div>
       </div>
     </div>
   )
