@@ -10,7 +10,7 @@ export const SLIDES: SlideConfig[] = [
   { id: 'problem',       steps: 5, label: 'Problem'      },  // 02
   { id: 'solution',      steps: 6, label: 'Solution'     },  // 03
   { id: 'category',      steps: 4, label: 'Category'     },  // 03b NEW
-  { id: 'product',       steps: 7, label: 'Product'      },  // 04
+  { id: 'product',       steps: 5, label: 'Product'      },  // 04
   { id: 'market',        steps: 3, label: 'Market'       },  // 05
   { id: 'why-now',       steps: 4, label: 'Why Now'      },  // 06
   { id: 'business',      steps: 4, label: 'Business'     },  // 07

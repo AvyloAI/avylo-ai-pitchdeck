@@ -12,13 +12,12 @@ const plans = [
     name: 'Starter',
     price: '$0',
     period: '/mo',
-    desc: 'Exploration, learning, and early product validation',
+    desc: 'Explore and validate early',
     features: [
-      '3 architecture generations/mo',
-      'Product blueprint overview',
-      'Database schema preview',
+      '3 architectures/mo',
+      'Blueprint overview',
+      'DB schema preview',
       'PDF export',
-      'Community support',
     ],
     color: '#44c4f6',
     highlighted: false,
@@ -28,14 +27,12 @@ const plans = [
     name: 'Builder',
     price: '$19',
     period: '/mo',
-    desc: 'For founders building real products faster',
+    desc: 'For founders building faster',
     features: [
-      'Advanced generation capacity',
       'Full architecture pack',
-      'MVP roadmap with sprints',
-      'AI developer prompt packs',
+      'MVP roadmap + sprints',
+      'AI developer prompts',
       'Visual diagram export',
-      'Email support',
     ],
     color: '#0087f8',
     highlighted: true,
@@ -45,14 +42,12 @@ const plans = [
     name: 'Team',
     price: '$59',
     period: '/mo',
-    desc: 'For startup teams scaling execution together',
+    desc: 'For startup teams scaling together',
     features: [
       'Everything in Builder',
-      'Up to 5 seats',
-      'Shared architecture workspace',
-      'Team prompt library & sync',
+      '5 seats · Shared workspace',
+      'Team prompt library',
       'API access',
-      'Priority support',
     ],
     color: '#34d399',
     highlighted: false,
@@ -62,14 +57,12 @@ const plans = [
     name: 'Enterprise',
     price: 'Custom',
     period: '',
-    desc: 'For organizations building innovation infrastructure',
+    desc: 'For innovation infrastructure',
     features: [
       'Everything in Team',
-      'Unlimited seats',
-      'SSO & SAML authentication',
-      'Custom AI model integrations',
-      'Dedicated onboarding & CSM',
-      'SLA + 24/7 priority support',
+      'Unlimited seats + SSO',
+      'Custom AI integrations',
+      'SLA + dedicated CSM',
     ],
     color: '#fbbf24',
     highlighted: false,
@@ -95,11 +88,11 @@ export default function BusinessModel({ step }: Props) {
             <Badge variant="success" size="md">Business Model</Badge>
           </motion.div>
           <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-4xl">
-            Scalable monetization from{' '}
-            <GradientText variant="primary">solo founders to enterprise innovation.</GradientText>
+            Land with founders.{' '}
+            <GradientText variant="primary">Expand through teams. Scale into enterprises.</GradientText>
           </motion.h2>
           <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-sm max-w-2xl leading-relaxed">
-            Avylo lands with founders, expands through teams, and scales into enterprise and institutional ecosystems.
+            Freemium entry · SaaS subscription growth · Institutional expansion.
           </motion.p>
         </motion.div>
 

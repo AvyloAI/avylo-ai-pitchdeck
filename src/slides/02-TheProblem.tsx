@@ -11,31 +11,31 @@ const painPoints = [
   {
     icon: <Layers size={20} />,
     title: 'No architecture clarity',
-    body: 'Founders ship features without coherent system design — technical debt compounds from day one and costs tens of thousands to unwind.',
+    body: 'Founders ship without system design. Technical debt compounds from day one — costing tens of thousands to unwind.',
     color: '#f87171',
   },
   {
     icon: <Cpu size={20} />,
-    title: 'Strategic guidance is inaccessible',
-    body: 'Expert architecture consultation runs $300–$600/hr. Early-stage teams burn runway on the wrong foundation before hiring help.',
+    title: 'Expert strategy is unaffordable',
+    body: 'Architecture consultation costs $300–$600/hr. Early teams burn runway on the wrong foundation.',
     color: '#fbbf24',
   },
   {
     icon: <Clock size={20} />,
-    title: 'Planning consumes entire sprints',
-    body: 'Manually mapping strategy, data models, and architecture diagrams takes weeks — time that should go toward building and validating.',
+    title: 'Planning kills sprints',
+    body: 'Mapping strategy, data models, and diagrams takes weeks. Time that should go toward building.',
     color: '#fb923c',
   },
   {
     icon: <AlertTriangle size={20} />,
-    title: 'Fragmented, disconnected tools',
-    body: 'Strategy in Notion. Diagrams in Miro. Roadmaps in Jira. Nothing integrates. The strategic layer is always missing.',
+    title: 'Tools are completely fragmented',
+    body: 'Strategy in Notion. Diagrams in Miro. Roadmaps in Jira. Nothing connects. The strategic layer is always missing.',
     color: '#f87171',
   },
   {
     icon: <Bot size={20} />,
-    title: 'AI accelerates code, not strategy',
-    body: 'Copilot and ChatGPT speed up implementation — but cannot define product architecture, team structure, or execution strategy.',
+    title: 'AI codes — it doesn\'t architect',
+    body: 'Copilot speeds up implementation. It cannot define architecture, structure your team, or build your execution strategy.',
     color: '#44c4f6',
   },
 ]
@@ -51,13 +51,13 @@ export default function TheProblem({ step }: Props) {
             <Badge variant="danger" size="md">The Problem</Badge>
           </motion.div>
           <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight max-w-3xl">
-            Execution is faster than ever.{' '}
+            Execution velocity is at an all-time high.{' '}
             <GradientText variant="violet" className="block md:inline">
               Strategic clarity is not.
             </GradientText>
           </motion.h2>
           <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-sm max-w-xl">
-            Founders waste thousands before building the right architecture. The strategic layer is still missing.
+            Founders are shipping faster than ever — on the wrong foundation.
           </motion.p>
         </motion.div>
 

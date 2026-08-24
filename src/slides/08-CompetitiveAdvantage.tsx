@@ -51,7 +51,7 @@ export default function CompetitiveAdvantage({ step }: Props) {
             <GradientText variant="full">strategic product intelligence layer.</GradientText>
           </motion.h2>
           <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-base max-w-xl">
-            This is not feature competition. This is category ownership. Every tool solves a slice — Avylo owns the full infrastructure layer.
+            Every existing tool solves a fragment. Avylo owns the full strategic product layer — from concept to execution.
           </motion.p>
         </motion.div>
 

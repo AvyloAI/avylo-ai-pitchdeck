@@ -58,9 +58,12 @@ export default function TheAsk({ step }: Props) {
             variants={cinemaEntrance}
             className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-3xl mx-auto"
           >
-            Seeking strategic capital, ecosystem leverage, and pilot partnerships to{' '}
-            <GradientText variant="full">define the AI Product Infrastructure category.</GradientText>
+            Join us in{' '}
+            <GradientText variant="full">defining the AI Product Infrastructure category.</GradientText>
           </motion.h2>
+          <motion.p variants={fadeUp} className="text-[var(--fg-muted)] text-base max-w-2xl mx-auto">
+            Strategic capital + ecosystem leverage + pilot partnerships.
+          </motion.p>
         </motion.div>
 
         {/* Ask cards */}

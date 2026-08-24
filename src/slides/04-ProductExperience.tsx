@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { Database, FileText, GitBranch, Layers, Map, TrendingUp, Users, Zap } from 'lucide-react'
+import { Database, FileText, Layers, Map, TrendingUp } from 'lucide-react'
 import Badge from '../components/ui/Badge'
 import GlassCard from '../components/ui/GlassCard'
 import GradientText from '../components/ui/GradientText'
@@ -10,58 +10,37 @@ interface Props { step: number }
 const modules = [
   {
     icon: <FileText  size={22} />,
-    title: 'AI Project Form',
-    desc: 'Structured intelligent intake that extracts full product requirements from a single description.',
+    title: 'AI Project Intake',
+    desc: 'Extracts full product requirements from a single prompt. The intelligent foundation everything else is built on.',
     color: '#0087f8',
     badge: 'Core',
   },
   {
     icon: <Layers    size={22} />,
     title: 'Architecture Generator',
-    desc: 'Instantly produces a layered system architecture — frontend, backend, infra, integrations.',
+    desc: 'Instantly produces a layered system architecture — frontend, backend, infrastructure, and integrations.',
     color: '#44c4f6',
-    badge: 'AI-powered',
-  },
-  {
-    icon: <GitBranch size={22} />,
-    title: 'Interactive Node System',
-    desc: 'Visual live diagram with editable, exportable architecture nodes and connection flows.',
-    color: '#44c4f6',
-    badge: 'Visual',
-  },
-  {
-    icon: <Map       size={22} />,
-    title: 'Execution Roadmap',
-    desc: 'Sprint-by-sprint delivery plan with milestones, resource requirements, and risk markers.',
-    color: '#34d399',
-    badge: 'Planning',
-  },
-  {
-    icon: <Users     size={22} />,
-    title: 'Execution Intelligence Layer',
-    desc: 'Recommends optimal team composition, technology stack, and organizational structure based on product requirements.',
-    color: '#fbbf24',
-    badge: 'Intelligence',
+    badge: 'AI Engine',
   },
   {
     icon: <Database  size={22} />,
     title: 'Database Blueprint',
-    desc: 'Auto-generates entity-relationship models, schema recommendations, and data strategy.',
-    color: '#f87171',
+    desc: 'Auto-generates entity-relationship models, schema design, and full data strategy.',
+    color: '#44c4f6',
     badge: 'Data',
   },
   {
-    icon: <TrendingUp size={22} />,
-    title: 'GTM Layer',
-    desc: 'Go-to-market channel recommendations, ICP definition, and positioning framework tailored to your product.',
+    icon: <Map       size={22} />,
+    title: 'Execution Roadmap',
+    desc: 'Sprint-by-sprint delivery plan with milestones, team structure, and risk markers.',
     color: '#34d399',
-    badge: 'GTM',
+    badge: 'Planning',
   },
   {
-    icon: <Zap size={22} />,
-    title: 'Founder OS',
-    desc: 'A unified strategic workspace that keeps product decisions, architecture, and execution in one living system.',
-    color: '#0087f8',
+    icon: <TrendingUp size={22} />,
+    title: 'GTM + Founder OS',
+    desc: 'Go-to-market positioning, ICP, and a unified strategic workspace — keeping all decisions in one living system.',
+    color: '#fbbf24',
     badge: 'Platform',
   },
 ]
@@ -77,15 +56,14 @@ export default function ProductExperience({ step }: Props) {
             <Badge variant="accent" size="md">Product Experience</Badge>
           </motion.div>
           <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-3xl">
-            A product architect, systems strategist,{' '}
-            and{' '}
-            <GradientText variant="primary">startup blueprint engine</GradientText>{' '}
-            in one platform.
+            From prompt to{' '}
+            <GradientText variant="primary">execution-ready company architecture</GradientText>{' '}
+            — in minutes.
           </motion.h2>
         </motion.div>
 
-        {/* Module grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {/* Module grid — 5 flagship modules */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
           {modules.map((m, i) => (
             <AnimatePresence key={i}>
               {step >= i && (
